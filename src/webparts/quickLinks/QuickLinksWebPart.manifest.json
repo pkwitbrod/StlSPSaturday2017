@@ -1,0 +1,20 @@
+{
+  "$schema": "../../../node_modules/@microsoft/sp-module-interfaces/lib/manifestSchemas/jsonSchemas/clientSideComponentManifestSchema.json",
+
+  "id": "ea37fea4-284b-4ada-87e0-1ccd6f5441ab",
+  "alias": "QuickLinksWebPart",
+  "componentType": "WebPart",
+  "version": "0.0.1",
+  "manifestVersion": 2,
+
+  "preconfiguredEntries": [{
+    "groupId": "ea37fea4-284b-4ada-87e0-1ccd6f5441ab",
+    "group": { "default": "Under Development" },
+    "title": { "default": "QuickLinks" },
+    "description": { "default": "A webpart to add quick links to your sharepoint page" },
+    "officeFabricIconFontName": "Page",
+    "properties": {
+      "description": "QuickLinks"
+    }
+  }]
+}
