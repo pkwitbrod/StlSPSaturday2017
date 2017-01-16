@@ -5,6 +5,7 @@
     "module": "commonjs",
     "jsx": "react",
     "declaration": true,
+    "compileOnSave" : false,
     "sourceMap": true,
     "types": [
       "webpack-env"

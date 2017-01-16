@@ -4,7 +4,8 @@ import { Version } from '@microsoft/sp-core-library';
 import {
   BaseClientSideWebPart,
   IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneTextField,
+  PropertyPaneDropdown
 } from '@microsoft/sp-webpart-base';
 
 import * as strings from 'quickLinksStrings';
@@ -40,14 +41,25 @@ export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinks
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
-                })
-              ]
+              PropertyPaneTextField('description', {
+                label: 'Description'
+              }),
+              PropertyPaneDropdown('test2', {
+                label: 'Dropdown',
+                options: [
+                  { key: '1', text: '1'},
+                  { key: '2', text: '3' },
+                  { key: '3', text: '5' },
+                  { key: '4', text: '10'}
+                ],
+                selectedKey: '3'
+            })
+            ]
             }
           ]
         }
       ]
     };
   }
+
 }
