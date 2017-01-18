@@ -5,6 +5,7 @@ import { IQuickLinksProps } from './IQuickLinksProps';
 
 export default class QuickLinks extends React.Component<IQuickLinksProps, void> {
   public render(): React.ReactElement<IQuickLinksProps> {
+    console.log(this.props.selectedDropdown);
     return (
       <div className={styles.helloWorld}>
         <div className={styles.container}>

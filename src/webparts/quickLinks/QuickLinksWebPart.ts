@@ -13,13 +13,16 @@ import QuickLinks from './components/QuickLinks';
 import { IQuickLinksProps } from './components/IQuickLinksProps';
 import { IQuickLinksWebPartProps } from './IQuickLinksWebPartProps';
 
+
+
 export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinksWebPartProps> {
 
   public render(): void {
     const element: React.ReactElement<IQuickLinksProps > = React.createElement(
       QuickLinks,
       {
-        description: this.properties.description
+        description: this.properties.description,
+        selectedDropdown: this.properties.selectedDropdown
       }
     );
 
@@ -44,8 +47,8 @@ export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinks
               PropertyPaneTextField('description', {
                 label: 'Description'
               }),
-              PropertyPaneDropdown('test2', {
-                label: 'Dropdown',
+              PropertyPaneDropdown('numberOfLinks', {
+                label: 'Number of links to display?',
                 options: [
                   { key: '1', text: '1'},
                   { key: '2', text: '3' },
@@ -61,5 +64,7 @@ export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinks
       ]
     };
   }
+
+
 
 }
