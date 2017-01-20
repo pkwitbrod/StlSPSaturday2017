@@ -25,6 +25,7 @@ export interface ISPLink {
 
 
 export default class QuickLinks extends React.Component<IQuickLinksProps, IQuickLinksState> {
+
   private _getMockListData(): Promise<ISPLinks> {
    return MockHttpClient.get("this.context.pageContext.web.absoluteUrl")
      .then((data: ISPLink[]) => {
@@ -50,10 +51,12 @@ export default class QuickLinks extends React.Component<IQuickLinksProps, IQuick
   }
 
   public render(): React.ReactElement<IQuickLinksProps> {
-    const items: JSX.Element[] = this.state.items.value.map((item: ISPLink, i: number): JSX.Element => {
-      return (
-        <li key={item.Id}><a href={item.URL}>{item.Title}</a></li>
-      );
+     const items: JSX.Element[] = this.state.items.value.map((item: ISPLink, i: number): JSX.Element => {
+       if (i < this.props.numberOfLinks) {
+         return (
+           <li key={item.Id}><a href={item.URL}>{item.Title}</a></li>
+         );
+       }
     });
 
     return (

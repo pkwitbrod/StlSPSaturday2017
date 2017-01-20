@@ -22,10 +22,9 @@ export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinks
       QuickLinks,
       {
         description: this.properties.description,
-        selectedDropdown: this.properties.selectedDropdown,
+        numberOfLinks: this.properties.numberOfLinks,
       }
     );
-
     ReactDom.render(element, this.domElement);
   }
 
@@ -50,10 +49,10 @@ export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinks
               PropertyPaneDropdown('numberOfLinks', {
                 label: 'Number of links to display?',
                 options: [
-                  { key: '1', text: '1'},
-                  { key: '2', text: '3' },
-                  { key: '3', text: '5' },
-                  { key: '4', text: '10'}
+                  { key: 1, text: '1'},
+                  { key: 3, text: '3' },
+                  { key: 5, text: '5' },
+                  { key: 10, text: '10'}
                 ],
                 selectedKey: '3'
             })
