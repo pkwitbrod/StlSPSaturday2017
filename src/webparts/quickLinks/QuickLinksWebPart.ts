@@ -8,11 +8,11 @@ import {
   PropertyPaneDropdown
 } from '@microsoft/sp-webpart-base';
 
+
 import * as strings from 'quickLinksStrings';
 import QuickLinks from './components/QuickLinks';
 import { IQuickLinksProps } from './components/IQuickLinksProps';
 import { IQuickLinksWebPartProps } from './IQuickLinksWebPartProps';
-
 
 
 export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinksWebPartProps> {
@@ -22,7 +22,7 @@ export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinks
       QuickLinks,
       {
         description: this.properties.description,
-        selectedDropdown: this.properties.selectedDropdown
+        selectedDropdown: this.properties.selectedDropdown,
       }
     );
 
@@ -64,7 +64,5 @@ export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinks
       ]
     };
   }
-
-
 
 }
