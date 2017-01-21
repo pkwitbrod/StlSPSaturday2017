@@ -39,7 +39,7 @@ export default class QuickLinks extends React.Component<IQuickLinksProps, IQuick
   }
 
   private _getRealListData(): Promise<ISPLinks> {
-    return this.props.httpClient.get(this.props.siteUrl + `/_api/lists/getbytitle('Links')/Items?$select=Title, Id, URL`, SPHttpClient.configurations.v1)
+    return this.props.httpClient.get(`${this.props.siteUrl}/_api/lists/getbytitle('Links')/Items?$select=Title, Id, URL`, SPHttpClient.configurations.v1)
       .then((response: Response) => {
         return response.json();
       });
@@ -63,7 +63,6 @@ export default class QuickLinks extends React.Component<IQuickLinksProps, IQuick
 
     }else if (Environment.type == EnvironmentType.SharePoint ||
               Environment.type == EnvironmentType.ClassicSharePoint) {
-        console.log("In SharePoint");
         this._getRealListData().then((response) => {
           const ListItems: ISPLinks = {value: response.value};
           this.setState({items: ListItems});
