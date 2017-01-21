@@ -1,13 +1,12 @@
 import * as React from 'react';
 import { css } from 'office-ui-fabric-react';
-// import { SPHttpClient } from '@microsoft/sp-http'
-
 import styles from './QuickLinks.module.scss';
 import { IQuickLinksProps } from './IQuickLinksProps';
 import MockHttpClient from '../service/MockHttpClient';
-
-
-
+import {
+  Environment,
+  EnvironmentType
+} from '@microsoft/sp-core-library';
 
 export interface IQuickLinksState {
   items: ISPLinks;
@@ -23,6 +22,11 @@ export interface ISPLink {
   Id: number;
 }
 
+import {
+  SPHttpClient
+} from '@microsoft/sp-http'
+
+
 
 export default class QuickLinks extends React.Component<IQuickLinksProps, IQuickLinksState> {
 
@@ -32,6 +36,13 @@ export default class QuickLinks extends React.Component<IQuickLinksProps, IQuick
        var listData: ISPLinks = { value: data };
        return listData;
      }) as Promise<ISPLinks>;
+  }
+
+  private _getRealListData(): Promise<ISPLinks> {
+    return this.props.httpClient.get(this.props.siteUrl + `/_api/lists/getbytitle('Links')/Items?$select=Title, Id, URL`, SPHttpClient.configurations.v1)
+      .then((response: Response) => {
+        return response.json();
+      });
   }
 
   constructor(props: IQuickLinksProps, state: IQuickLinksState) {
@@ -44,10 +55,20 @@ export default class QuickLinks extends React.Component<IQuickLinksProps, IQuick
    }
 
   public componentDidMount(): void {
-    this._getMockListData().then((response) => {
-      const mockItems: ISPLinks = {value: response.value}
-      this.setState({items: mockItems});
-    });
+    if (Environment.type === EnvironmentType.Local) {
+      this._getMockListData().then((response) => {
+        const ListItems: ISPLinks = {value: response.value};
+        this.setState({items: ListItems});
+      });
+
+    }else if (Environment.type == EnvironmentType.SharePoint ||
+              Environment.type == EnvironmentType.ClassicSharePoint) {
+        console.log("In SharePoint");
+        this._getRealListData().then((response) => {
+          const ListItems: ISPLinks = {value: response.value};
+          this.setState({items: ListItems});
+        });
+    }
   }
 
   public render(): React.ReactElement<IQuickLinksProps> {

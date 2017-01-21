@@ -7,6 +7,7 @@ import {
   PropertyPaneTextField,
   PropertyPaneDropdown
 } from '@microsoft/sp-webpart-base';
+import { SPHttpClient } from '@microsoft/sp-http'
 
 
 import * as strings from 'quickLinksStrings';
@@ -23,6 +24,8 @@ export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinks
       {
         description: this.properties.description,
         numberOfLinks: this.properties.numberOfLinks,
+        httpClient: this.context.spHttpClient,
+        siteUrl: this.context.pageContext.web.absoluteUrl
       }
     );
     ReactDom.render(element, this.domElement);
